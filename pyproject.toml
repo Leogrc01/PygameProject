@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "typegame"
+version = "0.1.0"
+description = "A Python-based typing game"
+authors = [
+    {name = "0kleoo", email = "layo2201@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "pygame>=2.0.0",
+    "numpy>=1.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black>=21.0",
+    "flake8>=4.0",
+]
+
+[project.scripts]
+typegame = "typegame.main:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
