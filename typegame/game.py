@@ -98,13 +98,13 @@ class Game:
             },
             7: {  # VIA
                 'name': 'VIA',
-                'bg': (245, 247, 250),
-                'text_inactive': (136, 144, 158),
-                'text_correct': (33, 37, 41),
+                'bg': (32, 32, 32),
+                'text_inactive': (186, 157, 157),
+                'text_correct': (228, 190, 181),
                 'text_incorrect': (220, 53, 69),
-                'text_current': (0, 123, 255),
-                'cursor': (0, 86, 179),
-                'accent': (0, 123, 255)
+                'text_current': (220, 220, 220),
+                'cursor': (228, 190, 181),
+                'accent': (220, 220, 220)
             },
             8: {  # Zen Dark
                 'name': 'Zen Dark',
@@ -112,18 +112,18 @@ class Game:
                 'text_inactive': (120, 130, 140),
                 'text_correct': (220, 220, 220),
                 'text_incorrect': (255, 120, 120),
-                'text_current': (160, 200, 255),
+                'text_current': (220, 220, 220),
                 'cursor': (100, 160, 255),
                 'accent': (160, 200, 255)
             },
             9: {  # Soft Light
                 'name': 'Soft Light',
-                'bg': (245, 245, 245),
-                'text_inactive': (170, 170, 170),
-                'text_correct': (40, 40, 40),
+                'bg': (219, 184, 138),
+                'text_inactive': (128, 128, 128),
+                'text_correct': (84, 84, 84),
                 'text_incorrect': (220, 100, 100),
-                'text_current': (70, 120, 200),
-                'cursor': (50, 90, 180),
+                'text_current': (173, 166, 156),
+                'cursor': (31, 31, 31),
                 'accent': (70, 120, 200)
             },
             10: {  # Forest Calm
@@ -631,13 +631,13 @@ class Game:
         
         # Title section
         title_y = 40
-        title_text = pygame.font.Font(None, 54).render("✨ Résultats de Performance", True, self.TEXT_CORRECT)
+        title_text = pygame.font.Font(None, 54).render("Résultats de Performance", True, self.TEXT_CORRECT)
         title_rect = title_text.get_rect(center=(self.width // 2, title_y))
         self.screen.blit(title_text, title_rect)
         
         # Warning if not saved
         if not self.game_was_saved:
-            warning_text = self.ui_font.render("⚠️  Session non sauvegardée", True, self.TEXT_INCORRECT)
+            warning_text = self.ui_font.render("Session non sauvegardée", True, self.TEXT_INCORRECT)
             warning_rect = warning_text.get_rect(center=(self.width // 2, title_y + 35))
             self.screen.blit(warning_text, warning_rect)
         
