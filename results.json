@@ -1,0 +1,191 @@
+[
+  {
+    "date": "2025-09-15T01:22:32.315113",
+    "wpm": 9,
+    "accuracy": 89.1,
+    "time": 67.3,
+    "characters_typed": 103,
+    "errors": 6,
+    "sentences_completed": 1
+  },
+  {
+    "date": "2025-09-15T01:24:51.143093",
+    "wpm": 5,
+    "accuracy": 13.6,
+    "time": 52.1,
+    "characters_typed": 151,
+    "errors": 19,
+    "sentences_completed": 5
+  },
+  {
+    "date": "2025-09-15T01:25:53.868644",
+    "wpm": 5,
+    "accuracy": 45.5,
+    "time": 50.2,
+    "characters_typed": 163,
+    "errors": 12,
+    "sentences_completed": 5
+  },
+  {
+    "date": "2025-09-15T01:41:27.307996",
+    "wpm": 7,
+    "accuracy": 70.6,
+    "time": 27.3,
+    "characters_typed": 122,
+    "errors": 5,
+    "sentences_completed": 5
+  },
+  {
+    "date": "2025-09-15T01:50:31.768835",
+    "wpm": 20,
+    "accuracy": 86.2,
+    "time": 40.5,
+    "characters_typed": 174,
+    "errors": 9,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T01:51:37.544904",
+    "wpm": 15,
+    "accuracy": 90.0,
+    "time": 59.1,
+    "characters_typed": 225,
+    "errors": 9,
+    "sentences_completed": 2
+  },
+  {
+    "date": "2025-09-15T01:58:14.896457",
+    "wpm": 18,
+    "accuracy": 89.2,
+    "time": 43.9,
+    "characters_typed": 178,
+    "errors": 8,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T01:59:05.925621",
+    "wpm": 17,
+    "accuracy": 87.0,
+    "time": 41.6,
+    "characters_typed": 178,
+    "errors": 9,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:02:32.302584",
+    "wpm": 12,
+    "accuracy": 73.1,
+    "time": 46.3,
+    "characters_typed": 201,
+    "errors": 18,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:08:41.342495",
+    "wpm": 55,
+    "accuracy": 89.4,
+    "time": 30.5,
+    "characters_typed": 141,
+    "errors": 15,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:09:35.522257",
+    "wpm": 50,
+    "accuracy": 92.0,
+    "time": 38.8,
+    "characters_typed": 162,
+    "errors": 13,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:10:00.499600",
+    "wpm": 45,
+    "accuracy": 76.2,
+    "time": 22.1,
+    "characters_typed": 84,
+    "errors": 20,
+    "sentences_completed": 1
+  },
+  {
+    "date": "2025-09-15T02:14:58.770276",
+    "wpm": 48,
+    "accuracy": 91.2,
+    "time": 42.5,
+    "characters_typed": 171,
+    "errors": 15,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:24:12.487104",
+    "wpm": 40,
+    "accuracy": 81.9,
+    "time": 27.8,
+    "characters_typed": 94,
+    "errors": 17,
+    "sentences_completed": 1
+  },
+  {
+    "date": "2025-09-15T02:29:01.769443",
+    "wpm": 53,
+    "accuracy": 93.8,
+    "time": 44.0,
+    "characters_typed": 195,
+    "errors": 12,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:42:26.420300",
+    "wpm": 47,
+    "accuracy": 94.0,
+    "time": 37.6,
+    "characters_typed": 150,
+    "errors": 9,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:46:05.332506",
+    "wpm": 48,
+    "accuracy": 91.2,
+    "time": 42.3,
+    "characters_typed": 170,
+    "errors": 15,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:58:00.045945",
+    "wpm": 55,
+    "accuracy": 96.0,
+    "time": 49.5,
+    "characters_typed": 227,
+    "errors": 9,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T02:59:14.435712",
+    "wpm": 49,
+    "accuracy": 96.8,
+    "time": 44.8,
+    "characters_typed": 186,
+    "errors": 6,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T03:00:19.939200",
+    "wpm": 23,
+    "accuracy": 92.6,
+    "time": 61.5,
+    "characters_typed": 122,
+    "errors": 9,
+    "sentences_completed": 2
+  },
+  {
+    "date": "2025-09-15T03:05:49.152147",
+    "wpm": 55,
+    "accuracy": 93.4,
+    "time": 42.9,
+    "characters_typed": 197,
+    "errors": 13,
+    "sentences_completed": 3
+  }
+]

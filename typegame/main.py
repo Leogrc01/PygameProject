@@ -2,6 +2,7 @@
 
 import pygame
 import sys
+import pandas as pd
 from .game import Game
 
 
