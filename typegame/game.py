@@ -105,6 +105,36 @@ class Game:
                 'text_current': (0, 123, 255),
                 'cursor': (0, 86, 179),
                 'accent': (0, 123, 255)
+            },
+            8: {  # Zen Dark
+                'name': 'Zen Dark',
+                'bg': (20, 22, 26),
+                'text_inactive': (120, 130, 140),
+                'text_correct': (220, 220, 220),
+                'text_incorrect': (255, 120, 120),
+                'text_current': (160, 200, 255),
+                'cursor': (100, 160, 255),
+                'accent': (160, 200, 255)
+            },
+            9: {  # Soft Light
+                'name': 'Soft Light',
+                'bg': (245, 245, 245),
+                'text_inactive': (170, 170, 170),
+                'text_correct': (40, 40, 40),
+                'text_incorrect': (220, 100, 100),
+                'text_current': (70, 120, 200),
+                'cursor': (50, 90, 180),
+                'accent': (70, 120, 200)
+            },
+            10: {  # Forest Calm
+                'name': 'Forest Calm',
+                'bg': (28, 32, 30),
+                'text_inactive': (110, 120, 110),
+                'text_correct': (210, 230, 210),
+                'text_incorrect': (235, 120, 100),
+                'text_current': (160, 220, 180),
+                'cursor': (120, 200, 150),
+                'accent': (160, 220, 180)
             }
         }
         
