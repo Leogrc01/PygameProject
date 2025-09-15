@@ -187,5 +187,41 @@
     "characters_typed": 197,
     "errors": 13,
     "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T03:41:13.826338",
+    "wpm": 54,
+    "accuracy": 92.2,
+    "time": 53.5,
+    "characters_typed": 245,
+    "errors": 19,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T03:44:26.905910",
+    "wpm": 48,
+    "accuracy": 88.2,
+    "time": 45.8,
+    "characters_typed": 187,
+    "errors": 22,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T03:54:58.286943",
+    "wpm": 50,
+    "accuracy": 92.2,
+    "time": 39.9,
+    "characters_typed": 167,
+    "errors": 13,
+    "sentences_completed": 3
+  },
+  {
+    "date": "2025-09-15T04:00:22.508871",
+    "wpm": 50,
+    "accuracy": 95.6,
+    "time": 49.0,
+    "characters_typed": 205,
+    "errors": 9,
+    "sentences_completed": 3
   }
 ]

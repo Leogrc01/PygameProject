@@ -23,13 +23,93 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running = True
         
-        # Colors - Modern Monkeytype-style palette
-        self.BG_COLOR = (23, 23, 23)  # Dark background
-        self.TEXT_INACTIVE = (85, 85, 85)  # Gray for untyped text
-        self.TEXT_CORRECT = (255, 255, 255)  # White for correctly typed
-        self.TEXT_INCORRECT = (220, 53, 69)  # Red for errors
-        self.TEXT_CURRENT = (255, 193, 7)  # Yellow/Gold for current character
-        self.CURSOR_COLOR = (255, 193, 7)  # Cursor color
+        # Theme system
+        self.current_theme = 0
+        self.themes = {
+            0: {  # Dark (Default)
+                'name': 'Dark',
+                'bg': (23, 23, 23),
+                'text_inactive': (85, 85, 85),
+                'text_correct': (255, 255, 255),
+                'text_incorrect': (220, 53, 69),
+                'text_current': (255, 193, 7),
+                'cursor': (255, 193, 7),
+                'accent': (255, 193, 7)
+            },
+            1: {  # Cyberpunk
+                'name': 'Cyberpunk',
+                'bg': (13, 13, 23),
+                'text_inactive': (100, 100, 120),
+                'text_correct': (0, 255, 255),
+                'text_incorrect': (255, 20, 147),
+                'text_current': (255, 0, 255),
+                'cursor': (255, 0, 255),
+                'accent': (57, 255, 20)
+            },
+            2: {  # Forest
+                'name': 'Forest',
+                'bg': (18, 33, 18),
+                'text_inactive': (100, 120, 100),
+                'text_correct': (200, 255, 200),
+                'text_incorrect': (255, 100, 100),
+                'text_current': (255, 215, 0),
+                'cursor': (255, 215, 0),
+                'accent': (50, 205, 50)
+            },
+            3: {  # Ocean
+                'name': 'Ocean',
+                'bg': (13, 27, 42),
+                'text_inactive': (100, 120, 140),
+                'text_correct': (173, 216, 230),
+                'text_incorrect': (255, 99, 71),
+                'text_current': (255, 165, 0),
+                'cursor': (255, 165, 0),
+                'accent': (65, 105, 225)
+            },
+            4: {  # Sunset
+                'name': 'Sunset',
+                'bg': (32, 18, 32),
+                'text_inactive': (120, 100, 120),
+                'text_correct': (255, 218, 185),
+                'text_incorrect': (255, 69, 0),
+                'text_current': (255, 140, 0),
+                'cursor': (255, 140, 0),
+                'accent': (255, 20, 147)
+            },
+            5: {  # Light
+                'name': 'Light',
+                'bg': (248, 249, 250),
+                'text_inactive': (150, 150, 150),
+                'text_correct': (33, 37, 41),
+                'text_incorrect': (220, 53, 69),
+                'text_current': (255, 106, 0),
+                'cursor': (255, 106, 0),
+                'accent': (0, 123, 255)
+            },
+            6: {  # Pastel Doux
+                'name': 'Pastel Doux',
+                'bg': (245, 245, 245),
+                'text_inactive': (160, 160, 160),
+                'text_correct': (80, 160, 80),
+                'text_incorrect': (200, 80, 80),
+                'text_current': (90, 120, 220),
+                'cursor': (50, 90, 200),
+                'accent': (90, 120, 220)
+            },
+            7: {  # VIA
+                'name': 'VIA',
+                'bg': (245, 247, 250),
+                'text_inactive': (136, 144, 158),
+                'text_correct': (33, 37, 41),
+                'text_incorrect': (220, 53, 69),
+                'text_current': (0, 123, 255),
+                'cursor': (0, 86, 179),
+                'accent': (0, 123, 255)
+            }
+        }
+        
+        # Apply initial theme
+        self.apply_theme()
         
         # Animation properties
         self.cursor_blink_time = 0
@@ -41,6 +121,13 @@ class Game:
         # UI state for results screen
         self.show_detailed_stats = False
         self.hover_button = None
+        
+        # Initialize button rectangles
+        self.restart_button = None
+        self.details_button = None
+        self.theme_button = None
+        self.quit_button = None
+        self.game_theme_button = None
         
         # Font - Monospace for better typing experience
         pygame.font.init()
@@ -125,6 +212,26 @@ class Game:
                 result.append(word)
         
         return result if result else quality_words
+    
+    def apply_theme(self):
+        """Apply the current theme colors."""
+        theme = self.themes[self.current_theme]
+        self.BG_COLOR = theme['bg']
+        self.TEXT_INACTIVE = theme['text_inactive']
+        self.TEXT_CORRECT = theme['text_correct']
+        self.TEXT_INCORRECT = theme['text_incorrect']
+        self.TEXT_CURRENT = theme['text_current']
+        self.CURSOR_COLOR = theme['cursor']
+        self.ACCENT_COLOR = theme['accent']
+    
+    def cycle_theme(self):
+        """Cycle to the next theme."""
+        self.current_theme = (self.current_theme + 1) % len(self.themes)
+        self.apply_theme()
+    
+    def get_theme_name(self):
+        """Get current theme name."""
+        return self.themes[self.current_theme]['name']
     
     def load_results_history(self) -> List[Dict[str, Any]]:
         """Load previous game results from file."""
@@ -319,30 +426,57 @@ class Game:
                         self.restart_game()
                     elif event.key == pygame.K_ESCAPE:
                         self.running = False
+                    elif event.key == pygame.K_t:
+                        # Cycle through themes
+                        self.cycle_theme()
             
             elif event.type == pygame.MOUSEMOTION:
+                mouse_pos = event.pos
+                self.hover_button = None
+                
                 if self.game_state == "finished":
-                    # Handle button hover
-                    mouse_pos = event.pos
-                    self.hover_button = None
-                    
-                    if hasattr(self, 'restart_button') and self.restart_button.collidepoint(mouse_pos):
+                    # Handle results screen button hover
+                    if (hasattr(self, 'restart_button') and self.restart_button and 
+                        self.restart_button.collidepoint(mouse_pos)):
                         self.hover_button = 'restart'
-                    elif hasattr(self, 'details_button') and self.details_button.collidepoint(mouse_pos):
+                    elif (hasattr(self, 'details_button') and self.details_button and 
+                          self.details_button.collidepoint(mouse_pos)):
                         self.hover_button = 'details'
-                    elif hasattr(self, 'quit_button') and self.quit_button.collidepoint(mouse_pos):
+                    elif (hasattr(self, 'theme_button') and self.theme_button and 
+                          self.theme_button.collidepoint(mouse_pos)):
+                        self.hover_button = 'theme'
+                    elif (hasattr(self, 'quit_button') and self.quit_button and 
+                          self.quit_button.collidepoint(mouse_pos)):
                         self.hover_button = 'quit'
+                elif self.game_state == "playing":
+                    # Handle game theme button hover
+                    if (hasattr(self, 'game_theme_button') and self.game_theme_button and 
+                        self.game_theme_button.collidepoint(mouse_pos)):
+                        self.hover_button = 'game_theme'
             
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.game_state == "finished" and event.button == 1:  # Left click
+                if event.button == 1:  # Left click
                     mouse_pos = event.pos
                     
-                    if hasattr(self, 'restart_button') and self.restart_button.collidepoint(mouse_pos):
-                        self.restart_game()
-                    elif hasattr(self, 'details_button') and self.details_button.collidepoint(mouse_pos):
-                        self.show_detailed_stats = not self.show_detailed_stats
-                    elif hasattr(self, 'quit_button') and self.quit_button.collidepoint(mouse_pos):
-                        self.running = False
+                    if self.game_state == "finished":
+                        # Results screen button clicks
+                        if (hasattr(self, 'restart_button') and self.restart_button and 
+                            self.restart_button.collidepoint(mouse_pos)):
+                            self.restart_game()
+                        elif (hasattr(self, 'details_button') and self.details_button and 
+                              self.details_button.collidepoint(mouse_pos)):
+                            self.show_detailed_stats = not self.show_detailed_stats
+                        elif (hasattr(self, 'theme_button') and self.theme_button and 
+                              self.theme_button.collidepoint(mouse_pos)):
+                            self.cycle_theme()
+                        elif (hasattr(self, 'quit_button') and self.quit_button and 
+                              self.quit_button.collidepoint(mouse_pos)):
+                            self.running = False
+                    elif self.game_state == "playing":
+                        # Game theme button click
+                        if (hasattr(self, 'game_theme_button') and self.game_theme_button and 
+                            self.game_theme_button.collidepoint(mouse_pos)):
+                            self.cycle_theme()
     
     def restart_game(self):
         """Restart the game with fresh state."""
@@ -614,10 +748,21 @@ class Game:
         # Action buttons - adjust position based on content
         base_button_y = self.height - 80
         button_y = base_button_y if not self.show_detailed_stats or len(self.results_history) <= 1 else base_button_y + 20
-        button_width = 150
         button_height = 40
         button_spacing = 20  # Space between buttons
-        total_buttons_width = (3 * button_width) + (2 * button_spacing)
+        
+        # Calculate individual button widths based on text content
+        restart_text = "Rejouer"
+        details_text = "Moins" if self.show_detailed_stats else "Plus"
+        theme_text = f"Theme: {self.get_theme_name()}"
+        quit_text = "Quitter"
+        
+        restart_width = max(100, self.ui_font.size(restart_text)[0] + 20)
+        details_width = max(80, self.ui_font.size(details_text)[0] + 20)
+        theme_width = max(120, self.ui_font.size(theme_text)[0] + 20)
+        quit_width = max(80, self.ui_font.size(quit_text)[0] + 20)
+        
+        total_buttons_width = restart_width + details_width + theme_width + quit_width + (3 * button_spacing)
         
         # Center the buttons
         buttons_start_x = (self.width - total_buttons_width) // 2
@@ -625,18 +770,22 @@ class Game:
         # Restart button
         restart_x = buttons_start_x
         restart_hovered = self.hover_button == 'restart'
-        self.restart_button = self.draw_button("♾️ Rejouer", restart_x, button_y, button_width, button_height, restart_hovered)
+        self.restart_button = self.draw_button(restart_text, restart_x, button_y, restart_width, button_height, restart_hovered)
         
         # Details toggle button
-        details_x = restart_x + button_width + button_spacing
+        details_x = restart_x + restart_width + button_spacing
         details_hovered = self.hover_button == 'details'
-        details_text = "📉 Moins" if self.show_detailed_stats else "📈 Plus"
-        self.details_button = self.draw_button(details_text, details_x, button_y, button_width, button_height, details_hovered)
+        self.details_button = self.draw_button(details_text, details_x, button_y, details_width, button_height, details_hovered)
+        
+        # Theme button
+        theme_x = details_x + details_width + button_spacing
+        theme_hovered = self.hover_button == 'theme'
+        self.theme_button = self.draw_button(theme_text, theme_x, button_y, theme_width, button_height, theme_hovered)
         
         # Quit button
-        quit_x = details_x + button_width + button_spacing
+        quit_x = theme_x + theme_width + button_spacing
         quit_hovered = self.hover_button == 'quit'
-        self.quit_button = self.draw_button("❌ Quitter", quit_x, button_y, button_width, button_height, quit_hovered)
+        self.quit_button = self.draw_button(quit_text, quit_x, button_y, quit_width, button_height, quit_hovered)
     
     def draw_history_graph(self):
         """Draw a line graph of WPM history."""
@@ -868,6 +1017,18 @@ class Game:
             inst_rect = inst_text.get_rect(center=(self.width // 2, y_offset))
             self.screen.blit(inst_text, inst_rect)
             y_offset += 25
+        
+        # Add theme button in bottom-right corner
+        theme_button_text = f"Theme: {self.get_theme_name()}"
+        theme_button_width = max(120, self.ui_font.size(theme_button_text)[0] + 20)
+        theme_button_height = 30
+        theme_button_x = self.width - theme_button_width - 20
+        theme_button_y = self.height - theme_button_height - 20
+        theme_hovered = self.hover_button == 'game_theme'
+        self.game_theme_button = self.draw_button(theme_button_text, 
+                                                 theme_button_x, theme_button_y, 
+                                                 theme_button_width, theme_button_height, 
+                                                 theme_hovered)
     
     def run(self):
         """Main game loop."""
